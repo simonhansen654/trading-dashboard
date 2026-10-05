@@ -1,8 +1,8 @@
 {
   "$schema_version": 1,
   "updated_at": {
-    "iso_copenhagen": "2026-10-05T16:24:49+02:00",
-    "iso_et": "2026-10-05T10:24:49-04:00",
+    "iso_copenhagen": "2026-10-05T16:34:16+02:00",
+    "iso_et": "2026-10-05T10:34:16-04:00",
     "source": "Trading bot; regenerated from state.json + trades.csv"
   },
   "account": {
@@ -34,11 +34,11 @@
     "size": null,
     "risk_usd": 500.0,
     "opened_at_et": null,
-    "status": "armed",
+    "status": "expired_missed",
     "r_multiple": null,
     "trigger": "pre-market NQ sweep of Fri RTH L (30965 wick) + 5m BOS up on BOTH at 09:25/09:30 close (NQ 31056.5>31026, ES 7789.25>7779.25) -> aligned bullish",
-    "waiting_for": "NQ long: need 1m close above ~31190 (then toward 31228 session wick high). TV 10:19: last 1m C=31166.50; recovery H~31177.75; no 1m BOS up or down. 5m still above 31141.75 (not invalidated). RR: if stop under news/swing low ~31112–31115, TP1 31229.5 is <1R — require tighter stop or TP1=ATH 31282.5. Bearish SMT watch: ES at new NY highs (~7798) while NQ still below 09:47 high ~31228 — short only if NQ 1m closes below ~31112 AND ES agrees with 5m BOS down (C<7784.25), after Asia-high sweep context. Hard cutoff 10:30 feed (~10:40 real).",
-    "notes": "TV confirm 10:19 ET: login OK, paper flat $100k, MACRO, feed D~10min. Chart left on ES1! 5m (not re-saved). No entry this run."
+    "waiting_for": "Stood down. Long trigger printed at feed 10:15 (NQ 1m C 31193.25 > 31186.75 swing high; stop would be under 1m swing low ~31173.5, ~20 pt risk, TP1 31229.5 ~1.8R) but it ran to TP1 by feed 10:22 (H 31237.5) before a run could act. ES hit PDH 7810.25. No chase (addendum rule 12); no fresh 1m retrace+BOS; feed cutoff 10:30 is minutes away.",
+    "notes": "TV confirm 10:19 ET: login OK, paper flat $100k, MACRO, feed D~10min. Chart left on ES1! 5m (not re-saved). No entry this run. | 10:33 ET real (feed 10:23): missed by the book, not traded."
   },
   "sweeps": [
     {
@@ -91,6 +91,26 @@
       "type": "close through",
       "closed_back_inside": false,
       "note": "ES took Asia H on 10:00–10:08 push (10:00 H=7793.5, then 7798.75). Removes prior bearish SMT (NQ swept Asia H while ES had not). Both indexes now swept Asia highs."
+    },
+    {
+      "instrument": "NQ",
+      "level": "NY/09:45 wick high 31229.5 (long TP1)",
+      "side": "high",
+      "time_et_feed": "10:21-10:22",
+      "extreme": 31237.5,
+      "type": "close through",
+      "closed_back_inside": false,
+      "note": "long draw reached after 10:15 1m BOS up; acts as target hit"
+    },
+    {
+      "instrument": "ES",
+      "level": "PDH 7810.25",
+      "side": "high",
+      "time_et_feed": "10:22",
+      "extreme": 7810.25,
+      "type": "wick (tag)",
+      "closed_back_inside": true,
+      "note": "ES tagged PDH exactly; no 5m BOS down yet"
     }
   ],
   "levels": {
@@ -130,7 +150,7 @@
   "bias": {
     "4H": "bullish (higher lows since 9/28-29; NQ ATH 31282.5 printed Fri 10/2)",
     "1H": "bearish pullback since Asia high Sun 21:00 (lower highs/lows into London low)",
-    "decision": "default LONG held (4H bullish, ATH context; N14). Continuation long needs fresh 1m BOS/IFVG up with RR>=1R. Short only if both print 5m BOS down after a high sweep — not present; prior SMT invalidated when ES took Asia H.",
+    "decision": "Long bias played out: both indexes ran to their draws (NQ 31229.5 taken, ES PDH 7810.25 tagged) after 10:15 feed 1m BOS up. Missed in real time due to 10-min feed delay + 5-min run cadence. No short: no 5m BOS down on either. Day done at 10:30 feed cutoff.",
     "longs_TP_candidates": "NQ wick high / NY H 31229.5, PDH/ATH 31282.5; ES PDH 7810.25 / ATH 7848.5",
     "shorts_TP_candidates": "NQ London L 30957.5, 1H low 30913.25, PDL 30760.25"
   },
@@ -138,24 +158,29 @@
   "status": {
     "run_lock": null,
     "notes_tail": [
-      "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window.",
       "10:18–10:22 ET real (feed ~10:08–10:12) run: ES swept Asia H 7793 (extreme 7798.75). NQ news-data 10:00 H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (TV NQ1! ~31166 at 10:19, still below 31186.75). No entry. TV confirmed: login OK, Paper Trading connected, MACRO, no open positions. Screenshots: 2026-10-05_1017_nq5/nq1/es5.png. Long RR to 31229.5 poor if stop under 31115.",
-      "10:24 ET: computerUse TV report absorbed — same decision (no entry). Refined 1m levels: long trigger ~31190/31228; swing low ~31112. Chart on ES1! 5m."
+      "10:24 ET: computerUse TV report absorbed — same decision (no entry). Refined 1m levels: long trigger ~31190/31228; swing low ~31112. Chart on ES1! 5m.",
+      "10:33 ET real (feed 10:23) run: NQ 1m BOS up at feed 10:15 (C 31193.25 > 31186.75) was a valid long trigger but price reached TP1 31229.5 (H 31237.5) by feed 10:22; ES tagged PDH 7810.25. Missed (would have needed action ~10:25 real). Did not chase (rule 12). No short setup. Armed setup expired; standing down. Remaining runs: no new entries (feed past 10:30 next), just confirm flat. Lesson: with ~10 min delay + 5 min cadence, fast continuation triggers can be missed; consider real-time CME data."
     ],
     "login_ok": true,
     "last_prices_feed": {
-      "feed_time_et": "10:08",
-      "NQ": 31152.25,
-      "ES": 7794.0,
-      "tv_wall_et": "10:19",
-      "tv_NQ": 31171.0,
-      "tv_ES": 7798.25,
-      "real_time_et": "10:23"
+      "feed_time_et": "10:23",
+      "NQ": 31230.0,
+      "ES": 7807.5,
+      "real_time_et": "10:33"
     },
     "news_data_levels": {
       "event": "ISM Services PMI 10:00 ET",
-      "NQ": {"H": 31167.0, "L": 31115.0, "C": 31148.5},
-      "ES": {"H": 7793.5, "L": 7781.0, "C": 7790.5},
+      "NQ": {
+        "H": 31167.0,
+        "L": 31115.0,
+        "C": 31148.5
+      },
+      "ES": {
+        "H": 7793.5,
+        "L": 7781.0,
+        "C": 7790.5
+      },
       "note": "10:00 5m candle H/L = news-data draw levels"
     },
     "tv_confirmed": {
@@ -167,7 +192,8 @@
       "checked_at_et": "10:19",
       "chart_left_on": "ES1! 5m",
       "feed_delayed": true
-    }
+    },
+    "day_status": "done_no_trade"
   },
   "field_guide": {
     "open_trade": {
@@ -187,8 +213,19 @@
     },
     "armed_setup": "same as open_trade plus trigger (string) and waiting_for (string); null when none",
     "trades_csv_columns": [
-      "date", "time_et", "instrument", "direction", "entry", "stop",
-      "targets", "size", "result", "R", "notes", "rule_break", "screenshot"
+      "date",
+      "time_et",
+      "instrument",
+      "direction",
+      "entry",
+      "stop",
+      "targets",
+      "size",
+      "result",
+      "R",
+      "notes",
+      "rule_break",
+      "screenshot"
     ],
     "poll": "Read /workspace/trading/dashboard.json every ~5 min during 09:02–10:57 ET weekdays; null open_trade means flat."
   }
