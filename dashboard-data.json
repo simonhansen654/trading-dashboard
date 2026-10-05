@@ -1,0 +1,76 @@
+{
+  "$schema_version": 1,
+  "updated_at": {
+    "iso_copenhagen": "2026-10-05T15:51:56+02:00",
+    "iso_et": "2026-10-05T09:51:56-04:00",
+    "source": "Trading bot; regenerated from state.json + trades.csv"
+  },
+  "account": {
+    "broker": "TradingView Paper Trading",
+    "username": "simonhansen634",
+    "currency": "USD",
+    "starting_balance": 100000.0,
+    "balance": 100000.0,
+    "equity": 100000.0,
+    "unrealized_pnl": 0.0,
+    "realized_pnl_today": 0.0,
+    "risk_pct": 0.5,
+    "max_trades_per_day": 2,
+    "trade_count_today": 0,
+    "losses_today": 0,
+    "feed_delay_min": 10,
+    "news": "ISM Services PMI 10:00 ET (high impact) + S&P Global PMI 09:45 ET -> half size (0.5% risk); 10:00 candle H/L becomes a news-data level",
+    "session_date": "2026-10-05"
+  },
+  "open_trade": null,
+  "armed_setup": {
+    "id": "2026-10-05-L1",
+    "instrument": "NQ (or ES, pick nearer draw)",
+    "direction": "long",
+    "entry": null,
+    "stop": null,
+    "tp1": 31221.25,
+    "tp2": 31282.5,
+    "size": null,
+    "risk_usd": 500.0,
+    "opened_at_et": null,
+    "status": "armed",
+    "r_multiple": null,
+    "trigger": "pre-market NQ sweep of Fri RTH L (30965 wick) + 5m BOS up on BOTH at 09:25/09:30 close (NQ 31056.5>31026, ES 7789.25>7779.25) -> aligned bullish",
+    "waiting_for": "5m retrace into continuation zone (NQ 5m FVG 31060-31141.75 / EQ ~31092; ES FVG 7779.25-7785.5 / EQ ~7782.4; ES 09:40 wick tagged 7785), then 1m BOS down (retrace) followed by 1m BOS/IFVG up close = entry. Stop below 1m retrace swing low. Skip if TP1 < ~1R. ES TP1 Asia H 7793, TP2 PDH 7810.25.",
+    "notes": "Alt short (counter-bias): London H swept on both + ES lower/equal highs vs NQ higher high (SMT). Needs 5m close below NQ 31141.75 AND ES 7785.0-7785.5 on both, then retrace + 1m BOS down. Log as counter-HTF if taken."
+  },
+  "sweeps": [],
+  "levels": {
+    "NQ": {
+      "ATH_PDH": 31282.5,
+      "Asia_H": 31221.25,
+      "Asia_L": 31003.75,
+      "London_H": 31099.25,
+      "London_L": 30957.5,
+      "PDL": 30760.25
+    },
+    "ES": {
+      "ATH": 7848.5,
+      "PDH": 7810.25,
+      "Asia_H": 7793.0,
+      "Asia_L": 7764.0,
+      "London_H": 7782.75,
+      "London_L": 7760.25,
+      "PDL": 7723.25
+    }
+  },
+  "bias": {
+    "4H": "bullish",
+    "1H": "bearish pullback",
+    "decision": "default LONG",
+    "longs_TP_candidates": "NQ London H / Asia H / ATH",
+    "shorts_TP_candidates": "NQ London L / PDL"
+  },
+  "trades": [],
+  "status": {
+    "run_lock": null,
+    "notes_tail": ["Seed for Vercel sync — Trading overwrites every 5 min."],
+    "login_ok": true
+  }
+}
