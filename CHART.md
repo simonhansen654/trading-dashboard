@@ -26,6 +26,7 @@ Overlays: 4H bias pill, rolling 8h UTC bucket H/L + PDH/PDL, sweep price + marke
 | `/api/klines?symbol=&interval=&limit=` | Binance Vision proxy (`data-api.binance.vision`) |
 | `/api/dashboard` | latest `dashboard-data.json` on GitHub `main` (fallback: bundled copy) |
 | `/api/pulse24/overlays` | latest `pulse24-overlays.json` on GitHub `main` (fallback: bundled copy) |
+| `/api/bot` | GET/POST `bot-control.json` — Crypto bot (TJR) on/off kill-switch |
 
 Routines only need to push `dashboard-data.json` and `pulse24-overlays.json` to `main` — no redeploy needed.
 Candles fall back to Binance direct (CORS `*`) in the browser if the proxy is unavailable.
@@ -34,6 +35,16 @@ If overlays lack levels, the client computes bucket H/L + PDH/PDL from 1h bars.
 ## Library
 
 [lightweight-charts](https://github.com/tradingview/lightweight-charts) v4 via unpkg CDN — open-source charting library only (not the TradingView product UI).
+
+## Crypto bot toggle
+
+On **Oversigt**: panel **Crypto bot (TJR)** — switch On/Off.
+
+- **ON** → crypto TJR 24/7 may take new paper entries
+- **OFF** → no new crypto entries (Pulse24 + TJR); open paper trades can still be managed
+- State: `bot-control.json` (GitHub `main` + `/workspace/trading/bot-control.json`)
+- Live: https://trading-dashboard-swart-psi.vercel.app/ (Oversigt)
+- Remote persist from the browser needs Vercel env `GITHUB_TOKEN` or `BOT_CONTROL_TOKEN`. Without it, the UI keeps localStorage and shows “sync ved næste agent-run”.
 
 ## Refresh
 
