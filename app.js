@@ -1,7 +1,18 @@
 const POLL_MS = 5 * 60 * 1000;
-const DATA_URL =
+const GH_DATA_URL =
   "https://raw.githubusercontent.com/simonhansen654/trading-dashboard/main/dashboard-data.json";
+const LOCAL_DATA_URL = "/api/dashboard";
 const $ = (id) => document.getElementById(id);
+
+async function resolveDataUrl() {
+  try {
+    const res = await fetch(LOCAL_DATA_URL + "?ts=" + Date.now(), {
+      cache: "no-store",
+    });
+    if (res.ok) return LOCAL_DATA_URL;
+  } catch (_) {}
+  return GH_DATA_URL;
+}
 
 function fmtMoney(n) {
   if (n == null || Number.isNaN(Number(n))) return "—";
@@ -29,10 +40,10 @@ function pnlClass(n) {
 
 function escapeHtml(s) {
   return String(s ?? "")
-    .replaceAll("&", "&")
-    .replaceAll("<", "<")
-    .replaceAll(">", ">")
-    .replaceAll('"', """);
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function dirBadge(dir) {
@@ -254,10 +265,17 @@ function render(data) {
   renderTrades(data.trades);
 }
 
+let dataUrlPromise = null;
+function getDataUrl() {
+  if (!dataUrlPromise) dataUrlPromise = resolveDataUrl();
+  return dataUrlPromise;
+}
+
 async function load() {
   const err = $("err");
   try {
-    const res = await fetch(DATA_URL + "?ts=" + Date.now(), {
+    const base = await getDataUrl();
+    const res = await fetch(base + (base.includes("?") ? "&" : "?") + "ts=" + Date.now(), {
       cache: "no-store",
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -283,16 +301,50 @@ backdrop.addEventListener("click", () => {
   backdrop.hidden = true;
 });
 
+const TITLES = {
+  overview: "Oversigt",
+  portfolio: "Portefølje",
+  orders: "Ordrer",
+  watchlist: "Watchlist",
+  journal: "Journal",
+  chart: "Chart · Pulse24",
+};
+
+function setView(name) {
+  const mainWrap = document.querySelector(".main-wrap");
+  const isChart = name === "chart";
+  mainWrap?.classList.toggle("chart-mode", isChart);
+  if (window.AtlasChart) {
+    window.AtlasChart.showChartView(isChart);
+  }
+  const h1 = document.querySelector(".topbar-left h1");
+  if (h1) h1.textContent = TITLES[name] || "Oversigt";
+  // hide generic err on chart (chart has its own)
+  if (isChart && $("err")) $("err").hidden = true;
+}
+
 document.querySelectorAll(".nav-item").forEach((el) => {
-  el.addEventListener("click", () => {
+  el.addEventListener("click", (ev) => {
+    const name = el.dataset.nav || "overview";
     document
       .querySelectorAll(".nav-item")
       .forEach((n) => n.classList.remove("active"));
     el.classList.add("active");
     sidebar.classList.remove("open");
     backdrop.hidden = true;
+    setView(name);
   });
 });
+
+// deep-link #chart
+if (location.hash === "#chart") {
+  const chartNav = document.querySelector('.nav-item[data-nav="chart"]');
+  if (chartNav) {
+    document.querySelectorAll(".nav-item").forEach((n) => n.classList.remove("active"));
+    chartNav.classList.add("active");
+    setView("chart");
+  }
+}
 
 $("refresh-btn").addEventListener("click", load);
 load();

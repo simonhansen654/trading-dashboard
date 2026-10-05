@@ -24,6 +24,7 @@
         <a class="nav-item" href="#portfolio" data-nav="portfolio">Portefølje</a>
         <a class="nav-item" href="#orders" data-nav="orders">Ordrer</a>
         <a class="nav-item" href="#watchlist" data-nav="watchlist">Watchlist</a>
+        <a class="nav-item" href="#chart" data-nav="chart">Chart</a>
         <a class="nav-item" href="#journal" data-nav="journal">Journal</a>
       </nav>
       <div class="sidebar-foot">
@@ -70,7 +71,7 @@
             <div class="panel-body" id="bias"></div>
           </article>
           <article class="panel">
-            <header class="panel-head"><h2>Nyheder & noter</h2></header>
+            <header class="panel-head"><h2>Nyheder &amp; noter</h2></header>
             <div class="panel-body">
               <div id="news" class="news" hidden></div>
               <ul class="notes" id="notes"></ul>
@@ -134,12 +135,56 @@
         </section>
       </main>
 
+        <section class="chart-view" id="chart-view" hidden>
+          <div class="chart-toolbar">
+            <div class="chart-group">
+              <span class="chart-label">Symbol</span>
+              <button type="button" class="chart-btn active" data-chart-sym="BTCUSDT">BTCUSDT</button>
+              <button type="button" class="chart-btn" data-chart-sym="ETHUSDT">ETHUSDT</button>
+              <span id="chart-symbol" class="sr-only" data-value="BTCUSDT">BTCUSDT</span>
+            </div>
+            <div class="chart-group">
+              <span class="chart-label">TF</span>
+              <button type="button" class="chart-btn" data-chart-tf="5m">5m</button>
+              <button type="button" class="chart-btn active" data-chart-tf="15m">15m</button>
+              <button type="button" class="chart-btn" data-chart-tf="1h">1H</button>
+              <button type="button" class="chart-btn" data-chart-tf="4h">4H</button>
+              <span id="chart-tf" class="sr-only" data-value="15m">15m</span>
+            </div>
+            <div class="chart-group chart-meta">
+              <span class="chart-pill range" id="chart-bias">4H —</span>
+              <span class="chart-chip" id="chart-period">—</span>
+              <span class="chart-chip" id="chart-scan">scan —</span>
+            </div>
+            <div class="chart-group chart-ohlc-wrap">
+              <span class="chart-ohlc" id="chart-ohlc">O —  H —  L —  C —</span>
+            </div>
+            <button type="button" class="btn-refresh" id="chart-refresh" title="Opdater chart">Opdater</button>
+          </div>
+          <div class="chart-err" id="chart-err" hidden></div>
+          <div class="chart-canvas-wrap">
+            <div id="chart-canvas" class="chart-canvas" role="img" aria-label="Pulse24 candlestick chart"></div>
+          </div>
+          <div class="chart-legend">
+            <span><i class="lg bucket-h"></i> Bucket H</span>
+            <span><i class="lg bucket-l"></i> Bucket L</span>
+            <span><i class="lg sweep"></i> Sweep</span>
+            <span><i class="lg bos"></i> BOS / IFVG</span>
+            <span><i class="lg eq"></i> Equilibrium / FVG</span>
+            <span><i class="lg stop"></i> Stop</span>
+            <span><i class="lg tp"></i> TP1–3</span>
+            <span class="chart-status" id="chart-status">Pulse24 overlays</span>
+          </div>
+        </section>
+
       <footer class="foot">
-        Paper trading · data synkroniseret fra GitHub · poll hvert 5. min
+        Paper trading · Binance public klines · Pulse24 overlays · poll hvert 5. min
       </footer>
     </div>
   </div>
   <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+  <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="chart.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
