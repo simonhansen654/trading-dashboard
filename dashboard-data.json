@@ -1,8 +1,8 @@
 {
   "$schema_version": 1,
   "updated_at": {
-    "iso_copenhagen": "2026-10-05T16:03:28+02:00",
-    "iso_et": "2026-10-05T10:03:28-04:00",
+    "iso_copenhagen": "2026-10-05T16:19:41+02:00",
+    "iso_et": "2026-10-05T10:19:41-04:00",
     "source": "Trading bot; regenerated from state.json + trades.csv"
   },
   "account": {
@@ -37,8 +37,8 @@
     "status": "armed",
     "r_multiple": null,
     "trigger": "pre-market NQ sweep of Fri RTH L (30965 wick) + 5m BOS up on BOTH at 09:25/09:30 close (NQ 31056.5>31026, ES 7789.25>7779.25) -> aligned bullish",
-    "waiting_for": "NQ long: 1m BOS down done at 09:46 (close 31171.5 < 31181.5); price now in discount of 5m leg 31141.75->31229.5 (EQ ~31185.6). Entry = 1m close above latest 1m swing high (now 31186.75, 09:48; 09:51 closed 31183.25 = no) or 1m IFVG up (close > 31192.75). Stop below 1m retrace low (currently 31151.25). TP1 NY high 31229.5, TP2 PDH/ATH 31282.5. Skip if TP1 < ~1R. Invalidated by 5m close < 31141.75 (5m BOS down). ES: 5m range 7784.25-7791.25, Asia H 7793 untaken; ES long RR poor (TP1 too close).",
-    "notes": "Alt short (counter-bias) now stronger: NQ swept Asia H 31221.25 by wick while ES failed at equal highs 7791.25 (bearish SMT). Needs 5m BOS down on BOTH (NQ close < 31141.75 AND ES close < 7784.25), then 5m retrace + 1m BOS down. Short TPs NQ London H 31099.25 / Sun open 31131. Log as counter-HTF. ISM Services 10:00 ET: feed shows it ~10:10 real; 10:00 5m candle H/L becomes news-data level."
+    "waiting_for": "NQ long still armed but NO 1m trigger yet. Latest 1m closes stay below swing high 31186.75 (09:48) and IFVG level 31192.75; max post-retrace H was 31192.25 (09:51) with C=31183.25. 5m NOT invalidated: no close < 31141.75 (10:00 wick to 31115 closed 31148.5). RR gate: if stop must sit below news low 31115, TP1 31229.5 is <1R from ~31187 entry — SKIP unless a tighter 1m swing low forms (stop >= ~31130 for ~1R to 31229.5) or use TP1=ATH 31282.5 (~2R). ES long not preferred (already through Asia H; chasing). Alt short WEAKENED: ES took Asia H; neither index has 5m BOS down (NQ needs C<31141.75, ES C<7784.25). Feed ~10:08 inside/end of 09:50–10:10; hard cutoff 10:30 feed (~10:40 real).",
+    "notes": "10:18 ET real / feed ~10:08: NQ ~31152–31170 consolidating after Asia wick; ES ~7794–7799 leading higher. Both 5m still not bearish. No entry. Half risk (0.5%) still on for news day."
   },
   "sweeps": [
     {
@@ -81,6 +81,16 @@
       "type": "wick",
       "closed_back_inside": true,
       "note": "wick above Asia H, 5m closed 31166.25 back inside. ES did NOT take Asia H 7793 (equal highs 7791.25 x4) -> bearish SMT at a significant level. Also removed long TP1 (Asia H)."
+    },
+    {
+      "instrument": "ES",
+      "level": "Asia_H 7793",
+      "side": "high",
+      "time_et_feed": "10:04",
+      "extreme": 7798.75,
+      "type": "close through",
+      "closed_back_inside": false,
+      "note": "ES took Asia H on 10:00–10:08 push (10:00 H=7793.5, then 7798.75). Removes prior bearish SMT (NQ swept Asia H while ES had not). Both indexes now swept Asia highs."
     }
   ],
   "levels": {
@@ -120,23 +130,38 @@
   "bias": {
     "4H": "bullish (higher lows since 9/28-29; NQ ATH 31282.5 printed Fri 10/2)",
     "1H": "bearish pullback since Asia high Sun 21:00 (lower highs/lows into London low)",
-    "decision": "default LONG (NQ at/near ATH, 4H bullish; N14). Ideal: sweep London L (NQ 30957.5 / ES 7760.25 or ES Fri RTH L 7754) after 09:30, then 5m BOS/IFVG up on both. Alt short: sweep London H (NQ 31099.25 / ES 7782.75) then 5m BOS down on both -> counter-bias, log it.",
-    "longs_TP_candidates": "NQ London H 31099.25, Sun open/gap 31131, Asia H 31221.25, PDH/ATH 31282.5",
+    "decision": "default LONG held (4H bullish, ATH context; N14). Continuation long needs fresh 1m BOS/IFVG up with RR>=1R. Short only if both print 5m BOS down after a high sweep — not present; prior SMT invalidated when ES took Asia H.",
+    "longs_TP_candidates": "NQ wick high / NY H 31229.5, PDH/ATH 31282.5; ES PDH 7810.25 / ATH 7848.5",
     "shorts_TP_candidates": "NQ London L 30957.5, 1H low 30913.25, PDL 30760.25"
   },
   "trades": [],
   "status": {
     "run_lock": null,
     "notes_tail": [
-      "09:37 ET run: TradingView CME data is DELAYED ~10 min ('D' badge); newest 5m bar at 09:37 real = 09:25. Paper acct 100,000 USD, no positions/orders. Pre-market range NQ 30965-31039.75 (top tested 09:25), ES 7765-7778.5. No sweeps yet. Treat candle timestamps (feed time) as the clock for window rules; real-time cutoff 10:35 ET ~= feed 10:25. Freddy told once about the delay.",
       "09:50 ET real (feed 09:40) run: NY open rally. NQ 31044->31176.75, ES 7778->7791.25; both 5m BOS up and aligned bullish; London H taken on both. No 1m retrace BOS yet (ES 09:37 close 7786.5 only tied 09:33 swing low). Armed long continuation; no entry (still manip window by feed time). Data from Yahoo 1m/5m (same ~10 min delay as TV).",
-      "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window."
+      "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window.",
+      "10:18 ET real (feed ~10:08) run: ES swept Asia H 7793 (extreme 7798.75). NQ 10:00 news-data H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (still below 31186.75). No entry. Long RR to 31229.5 poor if stop under 31115 — require tighter stop or TP1=ATH. TradingView check in progress."
     ],
     "login_ok": true,
     "last_prices_feed": {
-      "feed_time_et": "09:52",
-      "NQ": 31169.5,
-      "ES": 7787.75
+      "feed_time_et": "10:08",
+      "NQ": 31152.25,
+      "ES": 7794.0,
+      "real_time_et": "10:19"
+    },
+    "news_data_levels": {
+      "event": "ISM Services PMI 10:00 ET",
+      "NQ": {
+        "H": 31167.0,
+        "L": 31115.0,
+        "C": 31148.5
+      },
+      "ES": {
+        "H": 7793.5,
+        "L": 7781.0,
+        "C": 7790.5
+      },
+      "note": "10:00 5m candle H/L = news-data draw levels"
     }
   },
   "field_guide": {
@@ -171,6 +196,6 @@
       "rule_break",
       "screenshot"
     ],
-    "poll": "Read /workspace/trading/dashboard.json every ~5 min during 09:02–10:57 ET weekdays; null open_trade means flat. Also sync to simonhansen654/trading-dashboard dashboard-data.json for Vercel."
+    "poll": "Read /workspace/trading/dashboard.json every ~5 min during 09:02–10:57 ET weekdays; null open_trade means flat."
   }
 }
