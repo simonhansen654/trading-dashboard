@@ -1,8 +1,8 @@
 {
   "$schema_version": 1,
   "updated_at": {
-    "iso_copenhagen": "2026-10-05T16:19:41+02:00",
-    "iso_et": "2026-10-05T10:19:41-04:00",
+    "iso_copenhagen": "2026-10-05T16:23:30+02:00",
+    "iso_et": "2026-10-05T10:23:30-04:00",
     "source": "Trading bot; regenerated from state.json + trades.csv"
   },
   "account": {
@@ -140,27 +140,29 @@
     "notes_tail": [
       "09:50 ET real (feed 09:40) run: NY open rally. NQ 31044->31176.75, ES 7778->7791.25; both 5m BOS up and aligned bullish; London H taken on both. No 1m retrace BOS yet (ES 09:37 close 7786.5 only tied 09:33 swing low). Armed long continuation; no entry (still manip window by feed time). Data from Yahoo 1m/5m (same ~10 min delay as TV).",
       "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window.",
-      "10:18 ET real (feed ~10:08) run: ES swept Asia H 7793 (extreme 7798.75). NQ 10:00 news-data H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (still below 31186.75). No entry. Long RR to 31229.5 poor if stop under 31115 — require tighter stop or TP1=ATH. TradingView check in progress."
+      "10:18–10:22 ET real (feed ~10:08–10:12) run: ES swept Asia H 7793 (extreme 7798.75). NQ news-data 10:00 H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (TV NQ1! ~31166 at 10:19, still below 31186.75). No entry. TV confirmed: login OK, Paper Trading connected, MACRO, no open positions. Screenshots: 2026-10-05_1017_nq5/nq1/es5.png. Long RR to 31229.5 poor if stop under 31115."
     ],
     "login_ok": true,
     "last_prices_feed": {
       "feed_time_et": "10:08",
       "NQ": 31152.25,
       "ES": 7794.0,
-      "real_time_et": "10:19"
+      "tv_wall_et": "10:19",
+      "tv_NQ": 31171.0,
+      "tv_ES": 7798.25,
+      "real_time_et": "10:23"
+    },
+    "tv_confirmed": {
+      "login_ok": true,
+      "paper_connected": true,
+      "layout": "MACRO",
+      "open_positions": 0,
+      "checked_at_et": "10:19"
     },
     "news_data_levels": {
       "event": "ISM Services PMI 10:00 ET",
-      "NQ": {
-        "H": 31167.0,
-        "L": 31115.0,
-        "C": 31148.5
-      },
-      "ES": {
-        "H": 7793.5,
-        "L": 7781.0,
-        "C": 7790.5
-      },
+      "NQ": {"H": 31167.0, "L": 31115.0, "C": 31148.5},
+      "ES": {"H": 7793.5, "L": 7781.0, "C": 7790.5},
       "note": "10:00 5m candle H/L = news-data draw levels"
     }
   },
@@ -182,19 +184,8 @@
     },
     "armed_setup": "same as open_trade plus trigger (string) and waiting_for (string); null when none",
     "trades_csv_columns": [
-      "date",
-      "time_et",
-      "instrument",
-      "direction",
-      "entry",
-      "stop",
-      "targets",
-      "size",
-      "result",
-      "R",
-      "notes",
-      "rule_break",
-      "screenshot"
+      "date", "time_et", "instrument", "direction", "entry", "stop",
+      "targets", "size", "result", "R", "notes", "rule_break", "screenshot"
     ],
     "poll": "Read /workspace/trading/dashboard.json every ~5 min during 09:02–10:57 ET weekdays; null open_trade means flat."
   }
