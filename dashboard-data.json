@@ -1,8 +1,8 @@
 {
   "$schema_version": 1,
   "updated_at": {
-    "iso_copenhagen": "2026-10-05T16:23:30+02:00",
-    "iso_et": "2026-10-05T10:23:30-04:00",
+    "iso_copenhagen": "2026-10-05T16:24:49+02:00",
+    "iso_et": "2026-10-05T10:24:49-04:00",
     "source": "Trading bot; regenerated from state.json + trades.csv"
   },
   "account": {
@@ -37,8 +37,8 @@
     "status": "armed",
     "r_multiple": null,
     "trigger": "pre-market NQ sweep of Fri RTH L (30965 wick) + 5m BOS up on BOTH at 09:25/09:30 close (NQ 31056.5>31026, ES 7789.25>7779.25) -> aligned bullish",
-    "waiting_for": "NQ long still armed but NO 1m trigger yet. Latest 1m closes stay below swing high 31186.75 (09:48) and IFVG level 31192.75; max post-retrace H was 31192.25 (09:51) with C=31183.25. 5m NOT invalidated: no close < 31141.75 (10:00 wick to 31115 closed 31148.5). RR gate: if stop must sit below news low 31115, TP1 31229.5 is <1R from ~31187 entry — SKIP unless a tighter 1m swing low forms (stop >= ~31130 for ~1R to 31229.5) or use TP1=ATH 31282.5 (~2R). ES long not preferred (already through Asia H; chasing). Alt short WEAKENED: ES took Asia H; neither index has 5m BOS down (NQ needs C<31141.75, ES C<7784.25). Feed ~10:08 inside/end of 09:50–10:10; hard cutoff 10:30 feed (~10:40 real).",
-    "notes": "10:18 ET real / feed ~10:08: NQ ~31152–31170 consolidating after Asia wick; ES ~7794–7799 leading higher. Both 5m still not bearish. No entry. Half risk (0.5%) still on for news day."
+    "waiting_for": "NQ long: need 1m close above ~31190 (then toward 31228 session wick high). TV 10:19: last 1m C=31166.50; recovery H~31177.75; no 1m BOS up or down. 5m still above 31141.75 (not invalidated). RR: if stop under news/swing low ~31112–31115, TP1 31229.5 is <1R — require tighter stop or TP1=ATH 31282.5. Bearish SMT watch: ES at new NY highs (~7798) while NQ still below 09:47 high ~31228 — short only if NQ 1m closes below ~31112 AND ES agrees with 5m BOS down (C<7784.25), after Asia-high sweep context. Hard cutoff 10:30 feed (~10:40 real).",
+    "notes": "TV confirm 10:19 ET: login OK, paper flat $100k, MACRO, feed D~10min. Chart left on ES1! 5m (not re-saved). No entry this run."
   },
   "sweeps": [
     {
@@ -138,9 +138,9 @@
   "status": {
     "run_lock": null,
     "notes_tail": [
-      "09:50 ET real (feed 09:40) run: NY open rally. NQ 31044->31176.75, ES 7778->7791.25; both 5m BOS up and aligned bullish; London H taken on both. No 1m retrace BOS yet (ES 09:37 close 7786.5 only tied 09:33 swing low). Armed long continuation; no entry (still manip window by feed time). Data from Yahoo 1m/5m (same ~10 min delay as TV).",
       "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window.",
-      "10:18–10:22 ET real (feed ~10:08–10:12) run: ES swept Asia H 7793 (extreme 7798.75). NQ news-data 10:00 H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (TV NQ1! ~31166 at 10:19, still below 31186.75). No entry. TV confirmed: login OK, Paper Trading connected, MACRO, no open positions. Screenshots: 2026-10-05_1017_nq5/nq1/es5.png. Long RR to 31229.5 poor if stop under 31115."
+      "10:18–10:22 ET real (feed ~10:08–10:12) run: ES swept Asia H 7793 (extreme 7798.75). NQ news-data 10:00 H/L 31167/31115; ES 7793.5/7781. No 5m BOS down either index. No 1m BOS up for long (TV NQ1! ~31166 at 10:19, still below 31186.75). No entry. TV confirmed: login OK, Paper Trading connected, MACRO, no open positions. Screenshots: 2026-10-05_1017_nq5/nq1/es5.png. Long RR to 31229.5 poor if stop under 31115.",
+      "10:24 ET: computerUse TV report absorbed — same decision (no entry). Refined 1m levels: long trigger ~31190/31228; swing low ~31112. Chart on ES1! 5m."
     ],
     "login_ok": true,
     "last_prices_feed": {
@@ -152,18 +152,21 @@
       "tv_ES": 7798.25,
       "real_time_et": "10:23"
     },
-    "tv_confirmed": {
-      "login_ok": true,
-      "paper_connected": true,
-      "layout": "MACRO",
-      "open_positions": 0,
-      "checked_at_et": "10:19"
-    },
     "news_data_levels": {
       "event": "ISM Services PMI 10:00 ET",
       "NQ": {"H": 31167.0, "L": 31115.0, "C": 31148.5},
       "ES": {"H": 7793.5, "L": 7781.0, "C": 7790.5},
       "note": "10:00 5m candle H/L = news-data draw levels"
+    },
+    "tv_confirmed": {
+      "login_ok": true,
+      "paper_connected": true,
+      "layout": "MACRO",
+      "open_positions": 0,
+      "balance": 100000.0,
+      "checked_at_et": "10:19",
+      "chart_left_on": "ES1! 5m",
+      "feed_delayed": true
     }
   },
   "field_guide": {
