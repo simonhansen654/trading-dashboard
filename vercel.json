@@ -1,14 +1,14 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/api/dashboard.json", "destination": "/api/dashboard" }
+    { "source": "/api/dashboard.json", "destination": "/api/dashboard" },
+    { "source": "/api/klines.json", "destination": "/api/klines" },
+    { "source": "/api/pulse24/overlays.json", "destination": "/api/pulse24/overlays" }
   ],
   "headers": [
     {
       "source": "/api/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     }
   ]
 }
