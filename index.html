@@ -1,1 +1,145 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atlas Desk · Paper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-text">
+          <strong>Atlas Desk</strong>
+          <span>Paper trading</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Hovednavigation">
+        <a class="nav-item active" href="#overview" data-nav="overview">Oversigt</a>
+        <a class="nav-item" href="#portfolio" data-nav="portfolio">Portefølje</a>
+        <a class="nav-item" href="#orders" data-nav="orders">Ordrer</a>
+        <a class="nav-item" href="#watchlist" data-nav="watchlist">Watchlist</a>
+        <a class="nav-item" href="#journal" data-nav="journal">Journal</a>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="session-meta" id="session-meta">—</div>
+      </div>
+    </aside>
+
+    <div class="main-wrap">
+      <header class="topbar">
+        <button type="button" class="icon-btn sidebar-toggle" id="sidebar-toggle" aria-label="Menu" title="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-left">
+          <h1>Oversigt</h1>
+          <p class="account-line" id="account-line">Paper · loader…</p>
+        </div>
+        <div class="topbar-right">
+          <span class="user-chip" id="user-chip">—</span>
+          <span class="live-pill" id="login-pill">—</span>
+          <span class="updated" id="updated">Opdaterer…</span>
+          <button type="button" class="btn-refresh" id="refresh-btn" title="Opdater nu">Opdater</button>
+        </div>
+      </header>
+
+      <div class="err" id="err" hidden></div>
+
+      <section class="metric-strip" id="metrics" aria-label="Nøgletal"></section>
+
+      <main class="content" id="overview">
+        <section class="grid-2">
+          <article class="panel">
+            <header class="panel-head"><h2>Åben trade</h2></header>
+            <div class="panel-body" id="open-trade"><p class="empty">Ingen åben trade</p></div>
+          </article>
+          <article class="panel">
+            <header class="panel-head"><h2>Armed setup</h2></header>
+            <div class="panel-body" id="armed-setup"><p class="empty">Ingen armed setup</p></div>
+          </article>
+        </section>
+
+        <section class="grid-2">
+          <article class="panel">
+            <header class="panel-head"><h2>Bias</h2></header>
+            <div class="panel-body" id="bias"></div>
+          </article>
+          <article class="panel">
+            <header class="panel-head"><h2>Nyheder & noter</h2></header>
+            <div class="panel-body">
+              <div id="news" class="news" hidden></div>
+              <ul class="notes" id="notes"></ul>
+            </div>
+          </article>
+        </section>
+
+        <section class="grid-2">
+          <article class="panel">
+            <header class="panel-head"><h2>Niveauer · NQ</h2></header>
+            <div class="panel-body levels" id="levels-nq"></div>
+          </article>
+          <article class="panel">
+            <header class="panel-head"><h2>Niveauer · ES</h2></header>
+            <div class="panel-body levels" id="levels-es"></div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <header class="panel-head"><h2>Sweeps i dag</h2></header>
+          <div class="panel-body" id="sweeps"><p class="empty">Ingen sweeps</p></div>
+        </section>
+
+        <section class="panel" id="journal">
+          <header class="panel-head"><h2>Trade-log</h2></header>
+          <div class="panel-body table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Dato</th>
+                  <th>ET</th>
+                  <th>Inst</th>
+                  <th>Retning</th>
+                  <th class="num">Entry</th>
+                  <th class="num">Stop</th>
+                  <th>Targets</th>
+                  <th class="num">Size</th>
+                  <th>Result</th>
+                  <th class="num">R</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody id="trades-body">
+                <tr><td colspan="11" class="empty">Ingen trades endnu</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel stub" id="portfolio">
+          <header class="panel-head"><h2>Portefølje</h2></header>
+          <div class="panel-body"><p class="empty">Kommer snart — positioner og eksponering.</p></div>
+        </section>
+        <section class="panel stub" id="orders">
+          <header class="panel-head"><h2>Ordrer</h2></header>
+          <div class="panel-body"><p class="empty">Kommer snart — åbne og historiske ordrer.</p></div>
+        </section>
+        <section class="panel stub" id="watchlist">
+          <header class="panel-head"><h2>Watchlist</h2></header>
+          <div class="panel-body"><p class="empty">Kommer snart — NQ / ES / nøgletal.</p></div>
+        </section>
+      </main>
+
+      <footer class="foot">
+        Paper trading · data synkroniseret fra GitHub · poll hvert 5. min
+      </footer>
+    </div>
+  </div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>
