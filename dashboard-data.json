@@ -1,8 +1,8 @@
 {
   "$schema_version": 1,
   "updated_at": {
-    "iso_copenhagen": "2026-10-05T15:51:56+02:00",
-    "iso_et": "2026-10-05T09:51:56-04:00",
+    "iso_copenhagen": "2026-10-05T16:03:28+02:00",
+    "iso_et": "2026-10-05T10:03:28-04:00",
     "source": "Trading bot; regenerated from state.json + trades.csv"
   },
   "account": {
@@ -29,7 +29,7 @@
     "direction": "long",
     "entry": null,
     "stop": null,
-    "tp1": 31221.25,
+    "tp1": 31229.5,
     "tp2": 31282.5,
     "size": null,
     "risk_usd": 500.0,
@@ -37,18 +37,69 @@
     "status": "armed",
     "r_multiple": null,
     "trigger": "pre-market NQ sweep of Fri RTH L (30965 wick) + 5m BOS up on BOTH at 09:25/09:30 close (NQ 31056.5>31026, ES 7789.25>7779.25) -> aligned bullish",
-    "waiting_for": "5m retrace into continuation zone (NQ 5m FVG 31060-31141.75 / EQ ~31092; ES FVG 7779.25-7785.5 / EQ ~7782.4; ES 09:40 wick tagged 7785), then 1m BOS down (retrace) followed by 1m BOS/IFVG up close = entry. Stop below 1m retrace swing low. Skip if TP1 < ~1R. ES TP1 Asia H 7793, TP2 PDH 7810.25.",
-    "notes": "Alt short (counter-bias): London H swept on both + ES lower/equal highs vs NQ higher high (SMT). Needs 5m close below NQ 31141.75 AND ES 7785.0-7785.5 on both, then retrace + 1m BOS down. Log as counter-HTF if taken."
+    "waiting_for": "NQ long: 1m BOS down done at 09:46 (close 31171.5 < 31181.5); price now in discount of 5m leg 31141.75->31229.5 (EQ ~31185.6). Entry = 1m close above latest 1m swing high (now 31186.75, 09:48; 09:51 closed 31183.25 = no) or 1m IFVG up (close > 31192.75). Stop below 1m retrace low (currently 31151.25). TP1 NY high 31229.5, TP2 PDH/ATH 31282.5. Skip if TP1 < ~1R. Invalidated by 5m close < 31141.75 (5m BOS down). ES: 5m range 7784.25-7791.25, Asia H 7793 untaken; ES long RR poor (TP1 too close).",
+    "notes": "Alt short (counter-bias) now stronger: NQ swept Asia H 31221.25 by wick while ES failed at equal highs 7791.25 (bearish SMT). Needs 5m BOS down on BOTH (NQ close < 31141.75 AND ES close < 7784.25), then 5m retrace + 1m BOS down. Short TPs NQ London H 31099.25 / Sun open 31131. Log as counter-HTF. ISM Services 10:00 ET: feed shows it ~10:10 real; 10:00 5m candle H/L becomes news-data level."
   },
-  "sweeps": [],
+  "sweeps": [
+    {
+      "instrument": "NQ",
+      "level": "Fri_RTH_L 30988",
+      "side": "low",
+      "time_et_feed": "08:40-08:45",
+      "extreme": 30965.0,
+      "type": "wick",
+      "closed_back_inside": true,
+      "session": "pre-market",
+      "note": "pre-market sweep (rule 2b: no pre-market entry; after open wait for continuation confluence)"
+    },
+    {
+      "instrument": "NQ",
+      "level": "London_H 31099.25",
+      "side": "high",
+      "time_et_feed": "09:31",
+      "extreme": 31176.75,
+      "type": "close through",
+      "closed_back_inside": false,
+      "note": "run through, no reversal; also took Sun open 31131. Acts as long target hit, not a short sweep yet"
+    },
+    {
+      "instrument": "ES",
+      "level": "London_H 7782.75",
+      "side": "high",
+      "time_et_feed": "09:31",
+      "extreme": 7791.25,
+      "type": "close through",
+      "closed_back_inside": false,
+      "note": "ES highs 7791.25 x3 (09:32/09:35/09:36) while NQ made higher highs to 31176.75 -> possible bearish SMT, ES just under Asia H 7793"
+    },
+    {
+      "instrument": "NQ",
+      "level": "Asia_H 31221.25",
+      "side": "high",
+      "time_et_feed": "09:45",
+      "extreme": 31229.5,
+      "type": "wick",
+      "closed_back_inside": true,
+      "note": "wick above Asia H, 5m closed 31166.25 back inside. ES did NOT take Asia H 7793 (equal highs 7791.25 x4) -> bearish SMT at a significant level. Also removed long TP1 (Asia H)."
+    }
+  ],
   "levels": {
+    "source": "Yahoo NQ=F/ES=F 5m/60m (delayed ~10 min), front-month Dec; verify vs TradingView NQ1!/ES1!",
     "NQ": {
       "ATH_PDH": 31282.5,
       "Asia_H": 31221.25,
       "Asia_L": 31003.75,
       "London_H": 31099.25,
       "London_L": 30957.5,
-      "PDL": 30760.25
+      "premarket_0830_H": 31010.0,
+      "premarket_0830_L": 30965.0,
+      "Fri_RTH_L": 30988.0,
+      "PDL": 30760.25,
+      "1H_low_Fri0700": 30913.25,
+      "Fri_close": 31061.75,
+      "Sun_open": 31131.0,
+      "opening_gap": "31061.75-31131 (gap up, already filled overnight)",
+      "Sun_2200_1H_high_after_Asia": 31202.25
     },
     "ES": {
       "ATH": 7848.5,
@@ -57,20 +108,69 @@
       "Asia_L": 7764.0,
       "London_H": 7782.75,
       "London_L": 7760.25,
-      "PDL": 7723.25
+      "premarket_0830_H": 7780.5,
+      "premarket_0830_L": 7765.0,
+      "Fri_RTH_L": 7754.0,
+      "PDL": 7723.25,
+      "Fri_close": 7777.25,
+      "Sun_open": 7786.75,
+      "opening_gap": "7777.25-7786.75 (gap up, filled)"
     }
   },
   "bias": {
-    "4H": "bullish",
-    "1H": "bearish pullback",
-    "decision": "default LONG",
-    "longs_TP_candidates": "NQ London H / Asia H / ATH",
-    "shorts_TP_candidates": "NQ London L / PDL"
+    "4H": "bullish (higher lows since 9/28-29; NQ ATH 31282.5 printed Fri 10/2)",
+    "1H": "bearish pullback since Asia high Sun 21:00 (lower highs/lows into London low)",
+    "decision": "default LONG (NQ at/near ATH, 4H bullish; N14). Ideal: sweep London L (NQ 30957.5 / ES 7760.25 or ES Fri RTH L 7754) after 09:30, then 5m BOS/IFVG up on both. Alt short: sweep London H (NQ 31099.25 / ES 7782.75) then 5m BOS down on both -> counter-bias, log it.",
+    "longs_TP_candidates": "NQ London H 31099.25, Sun open/gap 31131, Asia H 31221.25, PDH/ATH 31282.5",
+    "shorts_TP_candidates": "NQ London L 30957.5, 1H low 30913.25, PDL 30760.25"
   },
   "trades": [],
   "status": {
     "run_lock": null,
-    "notes_tail": ["Seed for Vercel sync — Trading overwrites every 5 min."],
-    "login_ok": true
+    "notes_tail": [
+      "09:37 ET run: TradingView CME data is DELAYED ~10 min ('D' badge); newest 5m bar at 09:37 real = 09:25. Paper acct 100,000 USD, no positions/orders. Pre-market range NQ 30965-31039.75 (top tested 09:25), ES 7765-7778.5. No sweeps yet. Treat candle timestamps (feed time) as the clock for window rules; real-time cutoff 10:35 ET ~= feed 10:25. Freddy told once about the delay.",
+      "09:50 ET real (feed 09:40) run: NY open rally. NQ 31044->31176.75, ES 7778->7791.25; both 5m BOS up and aligned bullish; London H taken on both. No 1m retrace BOS yet (ES 09:37 close 7786.5 only tied 09:33 swing low). Armed long continuation; no entry (still manip window by feed time). Data from Yahoo 1m/5m (same ~10 min delay as TV).",
+      "10:01 ET real (feed 09:52) run: NQ 09:45 wick swept Asia H (31229.5) and closed back inside; ES stuck at equal highs 7791.25, no Asia H -> bearish SMT. No 5m BOS down on either (NQ low 31151.25 > 31141.75; ES 7784.25 ~ range low) so both still 5m bullish/aligned. NQ 1m BOS down 09:46 (retrace) but no 1m BOS up yet (09:51 close 31183.25 < 31186.75; 09:52 back to 31168). No entry. Long TP1 moved to 31229.5. Feed time 09:52 is inside 09:50-10:10 window."
+    ],
+    "login_ok": true,
+    "last_prices_feed": {
+      "feed_time_et": "09:52",
+      "NQ": 31169.5,
+      "ES": 7787.75
+    }
+  },
+  "field_guide": {
+    "open_trade": {
+      "id": "string",
+      "instrument": "NQ | ES",
+      "direction": "long | short",
+      "entry": "number",
+      "stop": "number",
+      "tp1": "number | null",
+      "tp2": "number | null",
+      "size": "number (contracts)",
+      "risk_usd": "number",
+      "opened_at_et": "HH:MM ET string",
+      "status": "open | partial | closed",
+      "r_multiple": "number | null",
+      "notes": "string"
+    },
+    "armed_setup": "same as open_trade plus trigger (string) and waiting_for (string); null when none",
+    "trades_csv_columns": [
+      "date",
+      "time_et",
+      "instrument",
+      "direction",
+      "entry",
+      "stop",
+      "targets",
+      "size",
+      "result",
+      "R",
+      "notes",
+      "rule_break",
+      "screenshot"
+    ],
+    "poll": "Read /workspace/trading/dashboard.json every ~5 min during 09:02–10:57 ET weekdays; null open_trade means flat. Also sync to simonhansen654/trading-dashboard dashboard-data.json for Vercel."
   }
 }
