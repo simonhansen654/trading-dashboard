@@ -1,0 +1,6 @@
+{
+  "crypto_tjr": true,
+  "updated_at": "2026-10-05T20:29:00+02:00",
+  "updated_by": "bootstrap",
+  "note": "Paper only. When crypto_tjr is false, crypto TJR and Pulse24 skip new entries."
+}
