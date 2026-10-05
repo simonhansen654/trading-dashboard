@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="bot.css" />
 </head>
 <body>
   <div class="app">
@@ -52,6 +53,32 @@
       <div class="err" id="err" hidden></div>
 
       <section class="metric-strip" id="metrics" aria-label="Nøgletal"></section>
+
+      <section class="panel bot-panel" id="bot-panel" aria-label="Crypto bot">
+        <header class="panel-head">
+          <h2>Crypto bot (TJR)</h2>
+          <span class="bot-pill" id="bot-pill">—</span>
+        </header>
+        <div class="panel-body bot-body">
+          <div class="bot-row">
+            <div class="bot-copy">
+              <strong>Paper · BTC + ETH · 24/7</strong>
+              <p>Når OFF tager rutinen <em>ingen nye</em> crypto-trades (Pulse24 + TJR). Åbne paper-trades kan stadig styres.</p>
+            </div>
+            <label class="bot-toggle" title="Slå crypto-bot til/fra">
+              <input type="checkbox" id="bot-toggle" />
+              <span class="bot-slider" aria-hidden="true"></span>
+              <span class="bot-state" id="bot-state">…</span>
+            </label>
+          </div>
+          <dl class="bot-meta kv">
+            <dt>Status</dt><dd id="bot-status">Henter…</dd>
+            <dt>Opdateret</dt><dd id="bot-updated">—</dd>
+            <dt>Sidste scan</dt><dd id="bot-last-scan">—</dd>
+            <dt>Persist</dt><dd id="bot-persist">—</dd>
+          </dl>
+        </div>
+      </section>
 
       <main class="content" id="overview">
         <section class="grid-2">
@@ -186,5 +213,6 @@
   <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
   <script src="chart.js"></script>
   <script src="app.js"></script>
+  <script src="bot-ui.js"></script>
 </body>
 </html>
